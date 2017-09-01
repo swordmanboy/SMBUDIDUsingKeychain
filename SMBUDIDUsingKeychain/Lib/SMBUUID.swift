@@ -19,8 +19,22 @@ public class SMBUUID : NSObject{
         if let udidFormKeyChain = keychain.get(SMBUUID.KEY_FOR_UDID){
             uuid = udidFormKeyChain
         }else{
-            uuid = UIDevice.current.identifierForVendor?.uuidString
+            uuid = SMBUUID.getUUID()
             keychain.set(uuid, forKey: SMBUUID.KEY_FOR_UDID)
+        }
+        
+        return uuid
+    }
+    
+    class func getUUID()->String{
+        var uuid : String! = nil
+        if uuid == nil{
+            uuid = UIDevice.current.identifierForVendor?.uuidString.lowercased()
+        }
+        
+        if uuid == nil{
+            //not oull
+            uuid = UUID.init().uuidString
         }
         
         return uuid

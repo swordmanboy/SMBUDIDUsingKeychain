@@ -6,6 +6,7 @@ target 'SMBUDIDUsingKeychain' do
   use_frameworks!
 
   pod 'KeychainSwift', '~> 8.0'
+  pod 'FCUUID'
   # Pods for SMBUDIDUsingKeychain
 
   target 'SMBUDIDUsingKeychainTests' do
