@@ -11,10 +11,11 @@ import KeychainSwift
 
 public class SMBUUID : NSObject{
     static let KEY_FOR_UDID : String! = "aed5e15a047369b821a4d5faa9da2b89"
+    static let KEY_SMBUUID : String! = "d5b18175b03ab50495df815f8dcf731c"
     
     class func uuidString () -> String{
         var uuid : String! = ""
-        let keychain = KeychainSwift()
+        let keychain = KeychainSwift.init(keyPrefix: SMBUUID.KEY_SMBUUID)
         if let udidFormKeyChain = keychain.get(SMBUUID.KEY_FOR_UDID){
             uuid = udidFormKeyChain
         }else{
