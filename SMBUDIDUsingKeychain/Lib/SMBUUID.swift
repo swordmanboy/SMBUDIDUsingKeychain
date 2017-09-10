@@ -28,15 +28,43 @@ public class SMBUUID : NSObject{
     
     class func getUUID()->String{
         var uuid : String! = nil
+        
+        //case vender
         if uuid == nil{
-            uuid = UIDevice.current.identifierForVendor?.uuidString.lowercased()
+            uuid = UIDevice.current.identifierForVendor?.uuidString
         }
         
+        //case from uidevice uuid
         if uuid == nil{
-            //not oull
+            uuid = UIDevice.current.uuid()
+        }
+        
+        //case uuid
+        if uuid == nil{
             uuid = UUID.init().uuidString
+        }
+        
+        //last cast new random uuid
+        if uuid == nil{
+            uuid = randomString(length: 32).lowercased()
         }
         
         return uuid
     }
+}
+
+func randomString(length: Int) -> String {
+    
+    let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+    let len = UInt32(letters.length)
+    
+    var randomString = ""
+    
+    for _ in 0 ..< length {
+        let rand = arc4random_uniform(len)
+        var nextChar = letters.character(at: Int(rand))
+        randomString += NSString(characters: &nextChar, length: 1) as String
+    }
+    
+    return randomString
 }
